@@ -1,0 +1,41 @@
+flowchart LR
+    %% =============== L-mate Demo ==================
+    classDef col  fill:#ffffff,stroke:#0d6efd,stroke-width:2px,rx:6,ry:6
+    classDef card fill:#f8f9fa,stroke:#94a3b8,stroke-width:1px,rx:4,ry:4,font-size:12px
+
+    subgraph PAGE[" "]
+      direction LR
+
+      %% ---------- 1. Provisioning / On-Boarding ----------
+      subgraph COL1["Provision & On-Board (25 %)"]
+         direction TB
+         P1["□ DHCP lease<br/>• macAddress<br/>• ip<br/>• leaseStart / leaseEnd<br/><i>src:</i> (ZTP DHCP – **TBD** if API delivered)"]:::card
+         P2["□ O.B Records by Device List → <code>status</code><br/><i>GET Dev / Sean / RTO / AO Onboarding / OB Records by Device List</i>"]:::card
+         P3["□ AO Onboard progress → <code>status==='done'</code><br/><i>same call, poll 1 s</i>"]:::card
+         P4["□ Device active → checkbox<br/><i>GET …/listDeviceRedisV2?serial=</i>"]:::card
+         P5["□ Environment (dev | qa | prod)<br/><i>POST …/setOnboardingEnvironment</i>"]:::card
+      end
+
+      %% ---------- 2. Activation / Config / Controls ----------
+      subgraph COL2["Activation & Config (50 %)"]
+         direction TB
+         A0["Firmware panel<br/>• current & latest<br/>• upgradeTime<br/><i>GET …/deviceProvisioning</i>"]:::card
+         A1["Port Config diff<br/>• speed<br/>• vlans<br/>• adminStatus<br/>• applied✔︎<br/><i>GET RTO / Service Config by Location</i>"]:::card
+         A2["Service list (IOD / EOD)<br/>row = serviceId + bandwidth + ✔︎applied<br/><i>GET RTO / Service Config by Location</i>"]:::card
+         A3["History fly-out<br/>event | old→new | timestamp<br/><i>GET …/deviceHistory</i>"]:::card
+         CTRL["Dev controls (hide in prod)<br/>🔄 POST …/triggerOnboarding<br/>⟲ POST …/factoryReset<br/><small>faster than full reset</small>"]:::card
+         SWAG["🖉 Swagger pop-in (shows request + response for whichever panel you click)"]:::card
+      end
+
+      %% ---------- 3. Live Metrics ----------
+      subgraph COL3["Metrics Rail (25 %)"]
+         direction TB
+         M1["Throughput (bps)<br/><i>GET /metrics/ethernet-bytes-sent-usage</i><br/><i>GET /metrics/ethernet-bytes-rcvd-usage</i>"]:::card
+         M2["Latency (ms)<br/><i>GET /metrics/ping → jsonPath Device.Optical.Interface.1.Stats</i>"]:::card
+         M3["Optical Tx / Rx Power (dBm)<br/><i>GET /metrics/optical.*</i>"]:::card
+         M4["CPU % & Memory free (MiB)<br/><i>GET /metrics/cpu-usage, /metrics/memory-free</i>"]:::card
+      end
+    end
+
+    %% apply blue frames to the three columns
+    class COL1,COL2,COL3 col
