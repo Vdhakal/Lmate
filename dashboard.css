@@ -1,0 +1,44 @@
+.device-dashboard-bg {
+    background: linear-gradient(120deg,#f0f4ff 0%,#fdfdff 40%,#f5f9ff 100%);
+    min-height: 100vh;
+    font-family: "Gotham Book", sans-serif;
+  }
+  
+  .panel-card {
+    border: 2px solid rgba(251, 132, 41, 0.2);  /* Lumen Orange with transparency */
+    border-radius: 1rem;
+    transition: transform .16s ease, box-shadow .16s ease;
+    height: 100%;
+  }
+  
+  .panel-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 22px -8px rgba(249, 94, 74, 0.25); /* Deep Orange with transparency */
+  }
+  
+  .panel-card .card-header {
+    background: rgba(251, 132, 41, 0.08); /* Lumen Orange with transparency */
+    color: #0f3133; /* Dark Teal */
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .2px;
+  }
+  
+  .metric-chart {
+    height: 60px;
+  }
+  
+  .service-row-applied td {
+    color: #fb8429; /* Lumen Orange */
+    font-weight: 500;
+  }
+  
+  .service-row-pending td {
+    color: #8e9399; /* Nickel */
+  }
+  .buttonPrimary{
+    background-color: #f95e4a;
+    border-color: #f95e4a !important;
+    border-radius: 0 10px 10px 25px;
+    padding: 5.5px 14px;
+}
